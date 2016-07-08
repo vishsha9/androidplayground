@@ -30,9 +30,6 @@ public class RXCombineFragment extends Fragment {
     @BindView(R.id.text_view)
     TextView textView;
 
-    @BindView(R.id.list_view)
-    ListView listView;
-
     @BindView(R.id.edit_text1)
     EditText editText1;
 
@@ -69,7 +66,7 @@ public class RXCombineFragment extends Fragment {
         Observable<String> observable = RxTextView.textChanges(editText1).map(new Func1<CharSequence, String>() {
             @Override
             public String call(CharSequence charSequence) {
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Text Changes on Thread: " + Thread.currentThread().getName());
                 return charSequence.toString();
             }
         });
@@ -77,7 +74,7 @@ public class RXCombineFragment extends Fragment {
         Observable<String> observable2 = RxTextView.textChanges(editText2).map(new Func1<CharSequence, String>() {
             @Override
             public String call(CharSequence charSequence) {
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Text Changes on Thread: " + Thread.currentThread().getName());
                 return charSequence.toString();
             }
         });
@@ -85,14 +82,14 @@ public class RXCombineFragment extends Fragment {
         Observable.combineLatest(observable, observable2, new Func2<String, String, String>() {
                 @Override
                 public String call(String s, String s2) {
-                    Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                    Log.i(TAG, "Combining Changes on Thread: " + Thread.currentThread().getName());
                     return s + " " + s2;
                 }
             }).subscribe(new Action1<String>() {
             @Override
             public void call(String o) {
                 Log.i(TAG, o.toString());
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Setting text view on Thread: " + Thread.currentThread().getName());
                 textView.setText(o);
             }
         });
@@ -101,7 +98,7 @@ public class RXCombineFragment extends Fragment {
         observableClick.subscribe(new Action1<Void>() {
             @Override
             public void call(Void aVoid) {
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Button click on Thread: " + Thread.currentThread().getName());
                 editText1.setText("");
                 editText2.setText("");
             }

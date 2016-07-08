@@ -9,4 +9,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="RXCombineFragmentHelp">
+        Here we demonstrate the Observable.combineLatest() method that will combine events from two different observables.\n\nWe create two observables from the two text views and create a third that combines them and updated the view below.
+    </string>
+
+    <string name="RXStreamFragment">
+        Here we demonstrate how easy it is to create streams of UI elements such as create a dialog box, take input and then update a view.
+    </string>
+
+    <string name="RXRetrofitFragment">
+        Here we demonstrate Retrofit and RX working together. Retrofit will return an Observable from the REST call which is then used to update a RecyclerView.\n\nWe have ensured that the Retrofit call is running on a parallel thread and the result is obtained on the main thread so we can update a view.\nYou can click the button many times to see this effect.
+    </string>
 </resources>

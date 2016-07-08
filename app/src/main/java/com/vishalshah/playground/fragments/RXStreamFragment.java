@@ -63,13 +63,13 @@ public class RXStreamFragment extends Fragment {
         observable.flatMap(new Func1<Void, Observable<?>>() {
             @Override
             public Observable<?> call(Void aVoid) {
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Button click on Thread: " + Thread.currentThread().getName());
                 return dialog(context);
             }
         }).filter(new Func1<Object, Boolean>() {
             @Override
             public Boolean call(Object o) {
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Filtering clicks on Thread: " + Thread.currentThread().getName());
                 if (o == null) {
                     return false;
                 } else {
@@ -89,7 +89,7 @@ public class RXStreamFragment extends Fragment {
 
             @Override
             public void onNext(Object o) {
-                Log.i(TAG, "Thread: " + Thread.currentThread().getName());
+                Log.i(TAG, "Set text view on Thread: " + Thread.currentThread().getName());
                 textView.setText((String)o);
             }
         });
