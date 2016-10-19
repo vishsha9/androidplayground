@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.vishalshah.playground.fragments.QueueNetworkReqFragment;
 import com.vishalshah.playground.fragments.RXCombineFragment;
 import com.vishalshah.playground.fragments.RXRetrofitFragment;
 import com.vishalshah.playground.fragments.RXStreamFragment;
@@ -76,6 +77,8 @@ public class HomeActivity extends AppCompatActivity
             fragment = new RXStreamFragment();
         } else if (id == R.id.item_rx_observable_retrofit) {
             fragment = new RXRetrofitFragment();
+        } else if (id == R.id.item_rx_queue_network) {
+            fragment = new QueueNetworkReqFragment();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

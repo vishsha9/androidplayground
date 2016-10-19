@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,9 +26,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -43,7 +39,9 @@ public class RXRetrofitFragment extends Fragment {
     private String TAG = "RXRetrofitFragment";
 
     @BindView(R.id.button_rx_retrofit)
-    Button button;
+    Button buttonWithProgress;
+    @BindView(R.id.button_rx_retrofit_multi)
+    Button buttonMultiThreading;
     @BindView(R.id.text_view_rx_retrofit)
     TextView textView;
     @BindView(R.id.recycler_view_rx_retrofit)
@@ -71,6 +69,7 @@ public class RXRetrofitFragment extends Fragment {
 
         ((PlaygroundApplication) getActivity().getApplication()).getNetworkComponent().inject(this);
 
+        // This has been commented out as we are not injection the PostService using Dagger
 //        Retrofit retrofit = new Retrofit.Builder()
 //                                .baseUrl("http://jsonplaceholder.typicode.com/")
 //                                .addConverterFactory(GsonConverterFactory.create())
@@ -121,7 +120,11 @@ public class RXRetrofitFragment extends Fragment {
             }
         });
 
-        Observable<Void> clickObservable = RxView.clicks(button);
+        /***
+         * Observable to show how to switch threads between IO thread for network calls and UI
+         * threads to show and dismiss the progress dialog.
+         */
+        Observable<Void> clickObservable = RxView.clicks(buttonWithProgress);
         clickObservable
             .map(new Func1<Void, Void>() {
                 @Override
@@ -159,6 +162,41 @@ public class RXRetrofitFragment extends Fragment {
                     progressDialog.dismiss();
                 }
             });
+
+        /***
+         * Observabe to show that each post works on different threads and clicking the button
+         * multiple times uses different threads seamlessly.
+         */
+        Observable<Void> clickObservableMultiThread = RxView.clicks(buttonMultiThreading);
+        clickObservableMultiThread
+                .observeOn(Schedulers.io())
+                .flatMap(new Func1<Void, Observable<PostModelRXRetrofit>>() {
+                    @Override
+                    public Observable<PostModelRXRetrofit> call(Void aVoid) {
+                        index = index + 1;
+                        Log.i(TAG, "RetrofitService on Thread: " + Thread.currentThread().getName());
+                        return postService.getPost(index.toString());
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<PostModelRXRetrofit>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(PostModelRXRetrofit postModelRXRetrofit) {
+                        Log.i(TAG, "Result of Service On Thread: " + Thread.currentThread().getName());
+                        Log.i(TAG, postModelRXRetrofit.toString());
+                        subjectPost.onNext(postModelRXRetrofit);
+                    }
+                });
 
     }
 }

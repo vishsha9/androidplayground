@@ -27,6 +27,9 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.subscriptions.Subscriptions;
 
+/***
+ * Shows a simple stream of interacting with different UI elements using RXAndroid
+ */
 public class RXStreamFragment extends Fragment {
 
     private Context context;

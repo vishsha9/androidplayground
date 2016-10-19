@@ -22,4 +22,5 @@
         Here we demonstrate Retrofit and RX working together. Retrofit will return an Observable from the REST call which is then used to update a RecyclerView.\n\nWe have ensured that the Retrofit call is running on a parallel thread and the result is obtained on the main thread so we can update a view.\nYou can click the button many times to see this effect.
     </string>
     <string name="RXFlowValidationHelp">Testing a complex flow with different error scenarios</string>
+    <string name="QueueNetworkReqFragment">This example will show how to queue up network requests when there is no network and when we get network, to replay all the messages in the queue. For simplicity sake, instead of creating a service that checks if we have network, we just click a button. The queue will be persisted and thus will keep messages after app closes.</string>
 </resources>

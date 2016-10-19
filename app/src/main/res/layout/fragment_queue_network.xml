@@ -2,19 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vishalshah.playground.fragments.RXRetrofitFragment">
+    tools:context="com.vishalshah.playground.fragments.QueueNetworkReqFragment">
 
     <LinearLayout
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="5dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/RXRetrofitFragment"
-            android:layout_marginBottom="5dp"/>
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,15 +20,15 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Click Me With Progress"
-                android:id="@+id/button_rx_retrofit"/>
+                android:text="Queue Request"
+                android:id="@+id/button_rx_queue_req"/>
 
             <Button
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Click Me Multi Threading"
-                android:id="@+id/button_rx_retrofit_multi"/>
+                android:text="Submit All"
+                android:id="@+id/button_rx_queue_submit"/>
 
         </LinearLayout>
 
@@ -42,18 +36,20 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Clear Contents"
-            android:id="@+id/button_rx_retrofit_clear"/>
+            android:text="Clear contents"
+            android:id="@+id/button_rx_queue_clear_content"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/text_view_rx_retrofit" />
+            android:id="@+id/text_view_queue_length"
+            android:text="Queue Length: 0"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recycler_view_rx_retrofit"/>
+            android:id="@+id/recycler_view_queue_network"/>
 
     </LinearLayout>
 

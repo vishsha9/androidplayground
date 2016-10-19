@@ -11,7 +11,7 @@
         android:id="@+id/item_rx_observable_retrofit" />
 
     <item
-        android:title="RX Complex Flow"
-        android:id="@+id/item_rx_complex_flow" />
+        android:title="RX Queuing Network Calls"
+        android:id="@+id/item_rx_queue_network" />
 
 </menu>
