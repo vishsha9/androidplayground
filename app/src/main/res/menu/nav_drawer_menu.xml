@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="RX Observable - Combine"
+        android:title="RX - Combine"
         android:id="@+id/item_rx_observable_combine" />
     <item
-        android:title="RX Observable - Stream"
+        android:title="RX - UI Flow"
         android:id="@+id/item_rx_observable_stream" />
     <item
         android:title="RX Observable - Retrofit"
         android:id="@+id/item_rx_observable_retrofit" />
+
+    <item
+        android:title="RX Complex Flow"
+        android:id="@+id/item_rx_complex_flow" />
+
 </menu>

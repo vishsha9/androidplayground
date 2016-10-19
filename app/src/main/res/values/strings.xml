@@ -21,4 +21,5 @@
     <string name="RXRetrofitFragment">
         Here we demonstrate Retrofit and RX working together. Retrofit will return an Observable from the REST call which is then used to update a RecyclerView.\n\nWe have ensured that the Retrofit call is running on a parallel thread and the result is obtained on the main thread so we can update a view.\nYou can click the button many times to see this effect.
     </string>
+    <string name="RXFlowValidationHelp">Testing a complex flow with different error scenarios</string>
 </resources>
